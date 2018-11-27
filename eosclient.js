@@ -5,8 +5,6 @@ var Db = require('mongodb').Db,
 
 dotenv.load();
 
-var url = "mongodb://" + process.env.MONGO_USR + ":" + process.env.MONGO_PASSWORD + "@127.0.0.1:27017/";
-var options = { useNewUrlParser: true };
 
 function stringify(obj_from_json){
 	var myEscapedJSONString = obj_from_json.replace(/ /g,'')
@@ -127,7 +125,8 @@ function process_results(result) {
   console.time("Query time");
   let client;
   try {
-    console.log("usr: " + process.env.MONGO_USR);
+    var url = "mongodb://" + process.env.MONGO_USR + ":" + process.env.MONGO_PWD + "@127.0.0.1:27017/";
+    var options = { useNewUrlParser: true };
     client = await MongoClient.connect(url, options);
     const db = client.db("EOS");
 
