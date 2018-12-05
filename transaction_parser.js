@@ -92,7 +92,7 @@ async function main() {
   dotenv.load();
   let client;
   try {
-    var url = "mongodb://" + process.env.READ_USR + ":" + process.env.READ_PWD + "@" + process.env.MONGO_DB_PLUGIN + ":" + process.env.MONGO_DB_PORT + "/EOS?replicaSet=rs0";
+    var url = "mongodb://" + process.env.TRANSAC_USR + ":" + process.env.TRANSAC_PWD + "@" + process.env.TRANSAC_SERVER + ":" + process.env.MONGO_DB_PORT + "?replicaSet=rs0";
     var options = { useNewUrlParser: true };
     client = await MongoClient.connect(url, options);
     const db = client.db("transactions");
