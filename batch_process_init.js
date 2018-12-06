@@ -78,34 +78,6 @@ async function process_results(result, drop) {
   return 1;
 }
 
-function watch_insert(con, db, coll) {
-  console.log(new Date() + ' watching: ' + coll);
-
-  const insert_pipeline = [ { $match:
-            { 
-              operationType: 'insert',
-              $or: [
-                { "receipt.receiver": "newdexpocket" },
-                { "act.account": "newdexpocket" }
-              ]
-            }
-          }];
-
-  con.db(db).collection(coll).watch(insert_pipeline)
-    .on('change', data => {
-      console.log(data)
-    });
-}
-
-async function run(uri) {
-  try {
-      con = await MongoClient.connect(uri, {"useNewUrlParser": true});
-      watch_insert(con, 'EOS', 'action_traces');
-    } catch (err) {
-      console.log(err);
-    }
-}
-
 async function main() {
   console.time("Total query time");
 
@@ -169,10 +141,6 @@ async function main() {
 
     client.close();
     console.timeEnd("Total query time");
-
-    // Then we plug in a Mongo ChangeStream to forward any new incoming transaction
-    
-    //run(url);
 
   } catch (err) {
     console.log(err);
