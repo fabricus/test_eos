@@ -31,6 +31,7 @@ async function process_results(result, drop) {
       unique_tsion[hash.toString()].receiver = result[i].receipt.receiver;
       unique_tsion[hash.toString()].name = result[i].act.name;
       unique_tsion[hash.toString()].account = result[i].act.account;
+      unique_tsion[hash.toString()].block_time = result[i].block_time;
     } else {
       count++;
       // raw hex data... this shouldn't happen so if we get here that means the server did something wrong when processing the transaction
