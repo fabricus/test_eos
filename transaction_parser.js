@@ -94,21 +94,15 @@ async function main() {
   try {
     var url = "mongodb://" + process.env.TRANSAC_USR + ":" + process.env.TRANSAC_PWD + "@" + process.env.TRANSAC_SERVER + ":" + process.env.MONGO_DB_PORT + "?replicaSet=rs0";
     var options = { useNewUrlParser: true };
+
     client = await MongoClient.connect(url, options);
     const db = client.db("transactions");
 
-    const read = await db.collection("action_traces")
-      .find(
-        { $or:
-          [
-            {"receipt.receiver": "newdexpocket"},
-            {"act.account": "newdexpocket"}
-          ]
-        })
-      .limit(10)
+    const read = await db.collection("newdexpocket")
+      .find()
       .toArray();
 
-    console.log(read);
+    console.log(read.length);
 
     client.close();
     
