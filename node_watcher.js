@@ -10,8 +10,8 @@ function watch_insert(con, db, coll) {
             { 
               operationType: 'insert',
               $or: [
-                { "receipt.receiver": "newdexpocket" },
-                { "act.account": "newdexpocket" }
+                { "fullDocument.receipt.receiver": "newdexpocket" },
+                { "fullDocument.act.account": "newdexpocket" }
               ]
             }
           }];

@@ -14,6 +14,7 @@ async function main() {
     client = await MongoClient.connect(url, options);
     const db = client.db("transactions");
 
+    // XXX - To be done for each marketplace
     const read = await db.collection("newdexpocket")
       .find()
       .toArray();
